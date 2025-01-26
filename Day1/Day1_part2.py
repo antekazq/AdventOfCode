@@ -28,43 +28,20 @@ num_data = read_from_file(file_path)
 left = (num_data[0:len(num_data):2])
 right = (num_data[1:len(num_data):2])
 
+#Initialize total sum and counter
+total = 0 #Holds the final result
+counter = 0 #Tracks the count of matches between elements in left and right
 
-distance = 0
+#Compare elements
+for i in left:   
+    for j in right:
+        if i == j: #Check for matches between elements
+            counter += 1
 
-#Loop until list is empty
-#And calculate the absolute difference between the smallest values
-while len(left) > 0:
-    distance = distance + abs(min(left) - min(right))
-    left.remove(min(left))
-    right.remove(min(right))
+    #Add the product of the element and its match count to the total
+    total = total + i*counter
 
-print ("Answer:", distance)
+    #Reset the counter for the next element
+    counter = 0
 
-
-#-----------------------------
-#Part 2
-
-# total = 0
-# counter = 0
-
-# for i in left:   
-#     for j in right:
-#         if i == j:
-#             counter += 1
-#             print(i, j, counter)
-             
-
-#     print(counter)
-#     total = total + i*counter
-#     counter = 0
-
-# print(total)
-
-    
-
-    
-
-
-
-    
-
+print("Total:", total)
