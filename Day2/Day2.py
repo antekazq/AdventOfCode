@@ -29,14 +29,14 @@ file_path = os.path.join(os.path.dirname(__file__),'Day2_input.txt')
 #Load data from input file
 data = read_from_file(file_path)
 
+#Requirements to pass:
+# - The levels are either all increasing or all decreasing.
+# - Any two adjacent levels differ by at least one and at most three.
 
-#Filter lists that are sorted (ascending or descending) and have no duplicates
-filtered_data = [lst for lst in data 
-    if ((lst == sorted(lst) or lst == sorted(lst, reverse=True)) and len(lst) == len(set(lst)))]
-
-#Keep on filtering lists where all adjacent numbers differ by at most 3
-final_data = [lst for lst in filtered_data 
-              if all(abs(lst[i + 1] - lst[i]) <= 3 for i in range(len(lst) - 1))]
+final_data = [lst for lst in data
+    if ((lst == sorted(lst) or lst == sorted(lst, reverse=True)) and
+        len(lst) == len(set(lst)) and
+        all(abs(lst[i + 1] - lst[i]) <= 3 for i in range(len(lst) - 1)))]
 
 #Display the number of valid lists ("reports") that passed all checks
 print("Number of safe reports:", len(final_data))
